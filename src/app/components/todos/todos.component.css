@@ -1,0 +1,111 @@
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.content-wrapper {
+  display: flex;
+}
+
+.todo:nth-child(even) {
+  background-color: #eee;
+}
+
+.todo:last-of-type {
+  border-bottom: 0;
+}
+
+.todo .id {
+  margin-right: 30px;
+}
+
+.content {
+  width: 100%;
+  max-width: 600px;
+  cursor: pointer;
+}
+
+.todo .title {
+  margin-right: 30px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.todo.done .content,
+.todo.done .title {
+  text-decoration: line-through;
+}
+
+.todo.editing {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.todo.editing .edit-input,
+.todo-input {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  appearance: none;
+  border: 2px solid #eee;
+  background-color: #FFF;
+  margin-bottom: 16px;
+  font-size: 20px;
+  outline: none;
+}
+
+.todo.editing .id {
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.todo-input {
+  background-color: #F3F3F3;
+  margin-top: 15px;
+}
+
+.todo-submit, .delete, .edit, .save {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+
+  background-color: #26aa4bfc;
+  color: #FFF;
+  margin: 15px auto;
+
+  padding: 10px 15px;
+  font-size: 18px;
+  font-weight: 700;
+
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.delete, .edit, .save{
+  width: 100px;
+  max-height: 32px;
+
+  background-color: #c71515;
+
+  padding: 5px;
+  font-size: 16px;
+}
+
+.edit, .save {
+  background-color: #1059f5;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 212px;
+}

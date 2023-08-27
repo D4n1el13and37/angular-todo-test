@@ -1,0 +1,66 @@
+<div class="todos">
+  <form (submit)="addTodo()">
+    <input
+      type="text"
+      name="inputTitle"
+      placeholder="Write title here ..."
+      class="todo-input"
+      [(ngModel)]="inputTitle"
+    />
+    <input
+      type="text"
+      name="inputTodo"
+      placeholder="Write todo here ..."
+      class="todo-input"
+      [(ngModel)]="inputTodo"
+    />
+    <input type="submit" class="todo-submit" value="Add Todo" />
+  </form>
+  <div
+    *ngFor="let todo of todos; let i = index"
+    class="todo"
+    [class.done]="todo.completed"
+    [class.editing]="editingIndex === i"
+  >
+    <!-- <div
+    *ngFor="let todo of todos; let i = index"
+    class="todo {{ todo.completed ? 'done' : '' }}"
+  > -->
+    <div class="content-wrapper">
+      <div class="id">{{ i + 1 }}</div>
+      <div *ngIf="editingIndex !== i" class="title" (click)="toggleDone(i)">
+        {{ todo.title }}
+      </div>
+      <div *ngIf="editingIndex !== i" class="content" (click)="toggleDone(i)">
+        {{ todo.content }}
+      </div>
+    </div>
+    <input
+      *ngIf="editingIndex === i"
+      type="text"
+      [(ngModel)]="editingTitle"
+      class="edit-input"
+    />
+    <input
+      *ngIf="editingIndex === i"
+      type="text"
+      [(ngModel)]="editingContent"
+      class="edit-input"
+    />
+    <div class="buttons">
+      <button *ngIf="editingIndex !== i" class="edit" (click)="startEditing(i)">
+        Edit
+      </button>
+      <button *ngIf="editingIndex === i" class="save" (click)="saveEditing(i)">
+        Save
+      </button>
+      <button class="delete" (click)="deleteTodo(i)">Remove</button>
+    </div>
+
+    <!-- <div class="id">{{ i + 1 }}</div>
+    <div class="title" (click)="toggleDone(i)">{{ todo.title }}</div>
+    <div class="content" (click)="toggleDone(i)">{{ todo.content }}</div>
+    <button class="edit">Edit</button>
+    <button class="delete" (click)="deleteTodo(i)">Remove</button> -->
+  </div>
+</div>
