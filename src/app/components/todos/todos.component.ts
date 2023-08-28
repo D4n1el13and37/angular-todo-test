@@ -34,6 +34,7 @@ export class TodosComponent implements OnInit {
         },
       ];
     }
+    this.sortTodos()
   }
 
   isValidInput(title: string, content: string): boolean {
@@ -43,6 +44,8 @@ export class TodosComponent implements OnInit {
   toggleDone(id: number) {
     this.todos.map((value, index) => {
       if (index == id) value.completed = !value.completed;
+
+      this.sortTodos()
       this.saveToLocalStorage();
 
       return value;
@@ -93,11 +96,18 @@ export class TodosComponent implements OnInit {
       this.editingTitle = '';
       this.editingContent = '';
 
+      this.sortTodos()
       this.saveToLocalStorage();
     }
   }
 
   saveToLocalStorage() {
     localStorage.setItem('todos', JSON.stringify(this.todos));
+  }
+
+  sortTodos() {
+    this.todos.sort((a,b) => {
+      return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
+    })
   }
 }
