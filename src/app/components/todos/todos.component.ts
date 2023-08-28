@@ -17,18 +17,23 @@ export class TodosComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.todos = [
-      {
-        title: 'Monday',
-        content: 'First todo',
-        completed: false,
-      },
-      {
-        title: 'Monday',
-        content: 'Second todo',
-        completed: true,
-      },
-    ];
+    const savedTodos = localStorage.getItem('todos');
+    if (savedTodos) {
+      this.todos = JSON.parse(savedTodos);
+    } else {
+      this.todos = [
+        {
+          title: 'Monday',
+          content: 'First todo',
+          completed: false,
+        },
+        {
+          title: 'Monday',
+          content: 'Second todo',
+          completed: true,
+        },
+      ];
+    }
   }
 
   isValidInput(title: string, content: string): boolean {
@@ -45,6 +50,8 @@ export class TodosComponent implements OnInit {
   deleteTodo(id: number) {
     this.todos = this.todos.filter((value, index) => index != id);
     this.editingIndex = null;
+
+    this.saveToLocalStorage();
   }
 
   addTodo() {
@@ -61,6 +68,8 @@ export class TodosComponent implements OnInit {
 
     this.inputTodo = '';
     this.inputTitle = '';
+
+    this.saveToLocalStorage();
   }
 
   startEditing(index: number) {
@@ -68,6 +77,7 @@ export class TodosComponent implements OnInit {
     this.editingTitle = this.todos[index].title;
     this.editingContent = this.todos[index].content;
   }
+
 
   saveEditing(index: number) {
     if (!this.isValidInput(this.editingTitle, this.editingContent)) {
@@ -77,10 +87,15 @@ export class TodosComponent implements OnInit {
     if (this.editingIndex !== null) {
       this.todos[index].title = this.editingTitle;
       this.todos[index].content = this.editingContent;
-
       this.editingIndex = null;
       this.editingTitle = '';
       this.editingContent = '';
+
+      this.saveToLocalStorage();
     }
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 }
