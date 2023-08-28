@@ -1,11 +1,35 @@
 .app {
   width: 100%;
   max-width: 968px;
+  height: 100%;
+
   margin: 0 auto;
+
+  border-radius: 32px;
+  background: aliceblue;
 }
 
 .app h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+footer {
+  height: 50px;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-around;
+  /* flex */
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #000;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
